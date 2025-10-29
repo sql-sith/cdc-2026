@@ -15,7 +15,7 @@ This repository holds meeting notes, source code, and other key resources for ou
 
 ## Resources
 
-In addition to this GitHub repo, we use a few other platforms throughout the year. Up-to-date links are on the [Wiki](https://github.com/sql-sith/cdc-2026/wiki).
+In addition to this GitHub repo, we use a few other platforms throughout the year. Up-to-date links are on the [Wiki](https://github.com/sql-sith/cdc-2026/wiki/Most-Important-Team-URLs).
 
 ### Zulip
 
