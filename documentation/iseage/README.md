@@ -12,8 +12,12 @@ This folder will be used to hold documentation on using iseage.
 |Document         |
 |-----------------|
 |[Adding a proxy to docker](./AddingAProxyForDocker.md)
+|[Creating a virtual machine](./CreatingAVirtualMachnie.md)
 |[Setting up a proxy for Ubuntu desktop](./SettingUpProxyForUbuntuDesktop.md)|
 |[Setting up a proxy for Ubuntu server](./SettingUpProxyForUbuntuServer.md)|
 |[Setting up a proxy for Windows 10](./SettingUpProxyForWindows10.md)|
+|[Switching to network manager](./SwitchingToNetworkManger.md)|
 
 > if you create documentation for Iseage, please link to it in the above table
+
+NOTE: some documents are untested and based off of experience. PLEASE send in any issues you have with using these documents.
