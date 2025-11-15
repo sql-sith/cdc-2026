@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD041 -->
 <table style="font-size: 0.85em; line-height: 1.0;">
   <tr>
     <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
@@ -16,14 +18,15 @@
   </tr>
 </table>
 <!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable MD041 -->
 
-# 📚 Using Windows PowerShell
+# Using Windows PowerShell
 
 ## 0. Setup
 
-* You can do these exercises on one of my Windows servers on ISEAGE or on your own computer if it is running Windows.
+* You can do these exercises on one of my Windows servers on ISEAGE (password = `P@ssw0rd`) or on your own computer if it is running Windows.
 * There are two versions of PowerShell. One has version numbers 5.x and the other has version numbers 7.x.
-  * We want to run 7.x. To do this, click the Start button and type `pwsh`. It's critical that you type `pwsh` and not `powershell`.
+  * We prefer to run version 7.x. To do this, click the Start button and type `pwsh`. It's critical that you type `pwsh` and not `powershell`.
   * The icon you are looking for is black, not blue.
   * Launch the PowerShell app with the black icon.
   * Type `$PSVersionTable` and hit enter.
@@ -43,7 +46,7 @@ Set-Location $HOME\pwsh_playground
 ## 1. Orientation
 
 * **Explain:** PowerShell is an object-oriented shell and scripting language that sends .NET objects between commands instead of plain text.
-* **cmdlets, commands, and variables:** `Get-Location`, `Get-ChildItem`, `whoami, $env:USER`
+* **cmdlets, commands, and variables:** `Get-Location`, `Get-ChildItem`, `whoami, $env:USERNAME`
 * **Mini-challenges:**
   * Where are you in the filesystem right now?
   * What is your username?
@@ -68,10 +71,16 @@ New-Item -ItemType File -Path .\hello.txt -Force
 Remove-Item -Path .\hello.txt
 ```
 
-* Which command is fastest to build `school\class\notes`?Copilot suggests the following. Can you do better?
+* How do you create a group of nested directories, such as `school\class\notes`, all at the same time? The following is the way to do this using cmdlets.
 
 ```powershell
 New-Item -ItemType Directory -Path .\school\class\notes -Force
+```
+
+* If you use the `mkdir`/`md` helper function, you can simplify this to the following.
+
+```powershell
+mkdir .\school\class\notes
 ```
 
 > ### **Key differences vs bash**
@@ -80,7 +89,7 @@ New-Item -ItemType Directory -Path .\school\class\notes -Force
 > * PowerShell returns objects not plain text
 > * PowerShell has a consistent parameter style (e.g., `-Path`, `-Force`).
 > * Pipes pass objects (not plaintext) to "downstream" commands, so those commands can access object properties and methods directly.
->   * You can use `Get-Member` to see this
+> * You can use `Get-Member` to see this
 
 ---
 
@@ -92,13 +101,13 @@ New-Item -ItemType Directory -Path .\school\class\notes -Force
   * Show first 5 lines of `C:\Windows\System32\drivers\etc\hosts`:
 
 ```powershell
-Get-Content -Path $env:windir\System32\drivers\etc\hosts -TotalCount 5
+Get-Content -Path $env:windir\System32\drivers\etc\hosts -First 5
 ```
 
 * Show last line:
 
 ```powershell
-Get-Content -Path $env:windir\System32\drivers\etc\hosts -Tail 1
+Get-Content -Path $env:windir\System32\drivers\etc\hosts -Last 1
 ```
 
 * Try to read a protected file and discuss permissions. (`Get-Content` will fail if you lack access; show error and explain needing elevated privileges.)
