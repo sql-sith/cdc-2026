@@ -27,16 +27,8 @@
 * You can do these exercises on one of my Windows servers on ISEAGE (password = `P@ssw0rd`) or on your own computer if it is running Windows.
 * There are two versions of PowerShell. One has version numbers 5.x and the other has version numbers 7.x.
   * We prefer to run version 7.x. To do this, click the Start button and type `pwsh`. It's critical that you type `pwsh` and not `powershell`.
-
-# 📚 Using Windows PowerShell
-
-## 0. Setup
-
-* You can do these exercises on one of my Windows servers on ISEAGE or on your own computer if it is running Windows.
-* There are two versions of PowerShell. One has version numbers 5.x and the other has version numbers 7.x.
-  * We want to run 7.x. To do this, click the Start button and type `powershell`.
-  * If you see a black PowerShell icon, or both black and blue PowerShell icons, start the black one. That should be PowerShell 7.x.
-  * If you only see a blue PowerShell icon, start that one. That is probably PowerShell 5.x. Once the prompt opens, type `pwsh` and then `ENTER`. If that works, you've started v7.x. If not, that's OK. It just means that PowerShell 5.x is probably the only PowerShell you have installed.
+  * The icon you are looking for is black, not blue.
+  * Launch the PowerShell app with the black icon.
   * Type `$PSVersionTable` and hit enter.
     * TAB is still your friend: type `$PSVer{TAB}`
     * Verify that your PSVersion value is 7.x, for example: 7.5.4
@@ -97,7 +89,7 @@ mkdir .\school\class\notes
 > * PowerShell returns objects not plain text
 > * PowerShell has a consistent parameter style (e.g., `-Path`, `-Force`).
 > * Pipes pass objects (not plaintext) to "downstream" commands, so those commands can access object properties and methods directly.
->   * You can use `Get-Member` to see this
+> * You can use `Get-Member` to see this
 
 ---
 
