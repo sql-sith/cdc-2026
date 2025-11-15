@@ -1,7 +1,3 @@
-<!-- markdownlint-disable MD033 -->
-
-<!-- markdownlint-disable MD041 -->
-
 <table style="font-size: 0.85em; line-height: 1.0;">
   <tr>
     <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
@@ -16,19 +12,18 @@
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Document</strong></td>
-    <td style="padding: 2px;">PowerShell Class Notes</strong></td>
+    <td style="padding: 2px;">Teaching Notes</strong></td>
   </tr>
 </table>
 <!-- markdownlint-enable MD033 -->
-<!-- markdownlint-enable MD041 -->
 
-# Using Windows PowerShell
+# 📚 Using Windows PowerShell
 
 ## 0. Setup
 
-* You can do these exercises on one of my Windows servers on ISEAGE (password = `P@ssw0rd`) or on your own computer if it is running Windows.
+* You can do these exercises on one of my Windows servers on ISEAGE or on your own computer if it is running Windows.
 * There are two versions of PowerShell. One has version numbers 5.x and the other has version numbers 7.x.
-  * We prefer to run version 7.x. To do this, click the Start button and type `pwsh`. It's critical that you type `pwsh` and not `powershell`.
+  * We want to run 7.x. To do this, click the Start button and type `pwsh`. It's critical that you type `pwsh` and not `powershell`.
   * The icon you are looking for is black, not blue.
   * Launch the PowerShell app with the black icon.
   * Type `$PSVersionTable` and hit enter.
@@ -73,16 +68,10 @@ New-Item -ItemType File -Path .\hello.txt -Force
 Remove-Item -Path .\hello.txt
 ```
 
-* How do you create a group of nested directories, such as `school\class\notes`, all at the same time? The following is the way to do this using cmdlets.
+* Which command is fastest to build `school\class\notes`?Copilot suggests the following. Can you do better?
 
 ```powershell
 New-Item -ItemType Directory -Path .\school\class\notes -Force
-```
-
-* If you use the `mkdir`/`md` helper function, you can simplify this to the following.
-
-```powershell
-mkdir .\school\class\notes
 ```
 
 > ### **Key differences vs bash**
@@ -91,13 +80,11 @@ mkdir .\school\class\notes
 > * PowerShell returns objects not plain text
 > * PowerShell has a consistent parameter style (e.g., `-Path`, `-Force`).
 > * Pipes pass objects (not plaintext) to "downstream" commands, so those commands can access object properties and methods directly.
-> * You can use `Get-Member` to see this
+>   * You can use `Get-Member` to see this
 
 ---
 
-## 3. Viewing and Editing Files
-
-### Viewing Files
+## 3. Viewing Files
 
 * **cmdlets:** `Get-Content`, `more`, `Select-Object -First`, `Select-Object -Last`
 * **Key differences vs bash:** `Get-Content` returns each line as a string object; you can pipe it to other cmdlets that accept input objects. Use `-Tail` or `-TotalCount` in newer PowerShell versions for similar behavior to `head`/`tail`.
@@ -105,85 +92,37 @@ mkdir .\school\class\notes
   * Show first 5 lines of `C:\Windows\System32\drivers\etc\hosts`:
 
 ```powershell
-Get-Content -Path $env:windir\System32\drivers\etc\hosts -First 5
+Get-Content -Path $env:windir\System32\drivers\etc\hosts -TotalCount 5
 ```
 
 * Show last line:
 
 ```powershell
-Get-Content -Path $env:windir\System32\drivers\etc\hosts -Last 1
+Get-Content -Path $env:windir\System32\drivers\etc\hosts -Tail 1
 ```
 
 * Try to read a protected file and discuss permissions. (`Get-Content` will fail if you lack access; show error and explain needing elevated privileges.)
 
-### **Editing Files**
+**BONUS!**
 
-* To edit files, you can use `notepad` on Windows; or `nano` on macOS/Linux. No matter which OS you use, You can use `code` if Visual Studio Code is installed.
-* If you are on a Windows client OS (eg: Windows 10 or Windows 11; this does *not* work on Windows Server OS versions less than 2025 [maybe 2022?]) you can use `winget` to quickly install a different editor. For example, the following PowerShell session uses `winget` to find `notepad++`.
-
-```powershell
-# first, look for notepad++ in winget:
-❯ winget search notepad++
-Name         Id                   Version Match                  Source
------------------------------------------------------------------------
-Notepad++    Notepad++.Notepad++  8.8.7   ProductCode: notepad++ winget
-Notepad Next dail8859.NotepadNext 0.12    Tag: notepad++         winget
-```
-
-The package on the first line with `Id = Notepad++.Notepad++` is the right one to install. To be sure you are installing the correct package, you can have winget show you details about the package.
-
-```powershell
-❯ winget show --Id 'Notepad++.Notepad++'
-Found Notepad++ [Notepad++.Notepad++]
-Version: 8.8.7
-Publisher: Notepad++ Team
-Publisher Url: https://notepad-plus-plus.org/
-Publisher Support Url: https://notepad-plus-plus.org/online-help
-Author: Don Ho
-Moniker: notepad++
-Description:
-  Notepad++ is a free (as in “free speech” and also as in “free beer”) source code editor and Notepad replacement that supports several languages.
-  Running in the MS Windows environment, its use is governed by GNU General Public License.
-Homepage: https://notepad-plus-plus.org/
-License: GPL-3.0-or-later
-License Url: https://github.com/notepad-plus-plus/notepad-plus-plus/blob/HEAD/LICENSE
-Copyright: Copyright (C)2021 Don HO <don.h@free.fr>.
-Copyright Url: https://raw.githubusercontent.com/notepad-plus-plus/notepad-plus-plus/master/LICENSE
-Release Notes Url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v8.8.7
-Documentation:
-  Wiki: https://github.com/notepad-plus-plus/notepad-plus-plus/wiki
-<remainder of the output truncated>
-```
-
-This output shows you the publisher, homepage, release notes, and documentation URLs. To register this information, the publisher had to provide proof of their identity to winget.
-
+* To edit files, a common beginner-friendly editor on Windows is Notepad; on macOS/Linux use `code` or `nano` if installed.
+  * We can do better than this.
 * Create and open a file:
-* Install Notepad++ if you don't already have an editor installed that you like to use.
-* Using your editor, create a new, empty document, type in it to enter some text, and then save it as a file in your `$HOME\pwsh_sandbox` directory.
-* Go back to the `$HOME\pwsh_sandbox` directory in PowerShell and use the command `Get-Content -Path <filename>` to see the content of the file you just created. It should look the same as it did in your editor.
 
-Finally, after discovering the package you want to install, use `winget install` to install it. You can include other keywords to ensure you are specifying the correct package. I usually use `--Source` to specify the source repository, and `--Exact` to make sure I have the package and source names exactly right. The source name is in the `winget search` output, and `--Exact` is case-sensitive, so that `winget install --Id notepad++.notepad++ --Source winget --Exact` won't work, because `--Exact` requires the `Id` field to be _exactly_ `Notepad++.Notepad++` (with upper-case `N` characters).
-
-To install `Notepad++`, you could use this `winget` command:
-
-```PowerShell
-> winget install --Id 'Notepad++.Notepad++' --Source winget --Exact
-Found Notepad++ [Notepad++.Notepad++] Version 8.8.9
-This application is licensed to you by its owner.
-Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
-Downloading https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.8.9/npp.8.8.9.Installer.x64.exe
-  ██████████████████████████████  6.54 MB / 6.54 MB
-Successfully verified installer hash
-Starting package install...
-The installer will request to run as administrator. Expect a prompt.
-Successfully installed
+```powershell
+New-Item -Path .\pwsh_sandbox.txt -ItemType File -Force
+notepad .\pwsh_sandbox.txt    # Windows
+# or
+code .\pwsh_sandbox.txt      # VS Code if installed cross-platform
 ```
+
+* After editing, read the file with `Get-Content`, then remove it with `Remove-Item`.
 
 ---
 
 ## 4. Permissions and Ownership
 
-* **cmdlets and commands:** `Get-Acl`, `Set-Acl`, `icacls` (Windows), `Get-ChildItem | Get-Acl` to inspect many files
+* **cmdlets:** `Get-Acl`, `Set-Acl`, `icacls` (Windows), `Get-ChildItem | Get-Acl` to inspect many files
 * **Key differences vs bash:** Windows file permissions use ACLs (access control lists) rather than simple rwx bits; PowerShell exposes ACL objects you can inspect and modify. On non-Windows platforms running PowerShell Core, POSIX permissions still apply and `Get-Acl` surfaces them differently.
 * **Mini-challenges:**
   * Who owns `C:\Windows\System32\drivers\etc\hosts`? (`Get-Acl` and check `Owner` property)
