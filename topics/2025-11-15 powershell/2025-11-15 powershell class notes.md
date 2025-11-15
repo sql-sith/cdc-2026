@@ -117,7 +117,7 @@ Get-Content -Path $env:windir\System32\drivers\etc\hosts -Last 1
 ### **Editing Files**
 
 * To edit files, you can use `notepad` on Windows; or `nano` on macOS/Linux. No matter which OS you use, You can use `code` if Visual Studio Code is installed.
-* If you are on a Windows client OS (eg: Windows 10 or Windows 11; this does *not* work on Windows Server OS versions) you can use `winget` to quickly install a different editor. For example, the following PowerShell session uses `winget` to install `notepad++`.
+* If you are on a Windows client OS (eg: Windows 10 or Windows 11; this does *not* work on Windows Server OS versions less than 2025 [maybe 2022?]) you can use `winget` to quickly install a different editor. For example, the following PowerShell session uses `winget` to find `notepad++`.
 
 ```powershell
 # first, look for notepad++ in winget:
@@ -131,6 +131,7 @@ Notepad Next dail8859.NotepadNext 0.12    Tag: notepad++         winget
 The package on the first line with `Id = Notepad++.Notepad++` is the right one to install. To be sure you are installing the correct package, you can have winget show you details about the package.
 
 ```powershell
+❯ winget show --Id 'Notepad++.Notepad++'
 Found Notepad++ [Notepad++.Notepad++]
 Version: 8.8.7
 Publisher: Notepad++ Team
@@ -158,6 +159,23 @@ This output shows you the publisher, homepage, release notes, and documentation 
 * Install Notepad++ if you don't already have an editor installed that you like to use.
 * Using your editor, create a new, empty document, type in it to enter some text, and then save it as a file in your `$HOME\pwsh_sandbox` directory.
 * Go back to the `$HOME\pwsh_sandbox` directory in PowerShell and use the command `Get-Content -Path <filename>` to see the content of the file you just created. It should look the same as it did in your editor.
+
+Finally, after discovering the package you want to install, use `winget install` to install it. You can include other keywords to ensure you are specifying the correct package. I usually use `--Source` to specify the source repository, and `--Exact` to make sure I have the package and source names exactly right. The source name is in the `winget search` output, and `--Exact` is case-sensitive, so that `winget install --Id notepad++.notepad++ --Source winget --Exact` won't work, because `--Exact` requires the `Id` field to be _exactly_ `Notepad++.Notepad++` (with upper-case `N` characters).
+
+To install `Notepad++`, you could use this `winget` command:
+
+```PowerShell
+> winget install --Id 'Notepad++.Notepad++' --Source winget --Exact
+Found Notepad++ [Notepad++.Notepad++] Version 8.8.9
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.8.9/npp.8.8.9.Installer.x64.exe
+  ██████████████████████████████  6.54 MB / 6.54 MB
+Successfully verified installer hash
+Starting package install...
+The installer will request to run as administrator. Expect a prompt.
+Successfully installed
+```
 
 ---
 
