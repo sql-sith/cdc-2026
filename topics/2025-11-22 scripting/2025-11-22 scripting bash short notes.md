@@ -1,22 +1,25 @@
-### Student handout — Bash quick lab (one page)
+# Student handout — Bash quick lab (one page)
 
-#### Quick setup
+## Quick setup
 
+* Students copy scripts to their Bash environments
 * Make scripts executable then run them:
-
+  ```
   chmod +x runner.sh child.sh
-
   ./runner.sh
+  ```
 
 ---
 
-#### Script 1 — FOR loop: summarize .txt files
+## Script 1 — FOR loop: summarize .txt files
 
 ```bash
-#!/usr/bin/env bash
+#!/bin/bash
+# summarize.sh
+
 for f in *.txt; do
   echo "File: $f"
-  cat "$f" | wc -l | sed 's/^/Lines: /'
+  cat "$f" | wc -l | awk '{ print "Lines: " $1 }' 
   echo "First four lines:"
   head -n 4 "$f"
   echo "----"
@@ -25,18 +28,21 @@ done
 
 Notes immediately after Script 1
 
-* Alternative formatting tools: `awk`, `printf`, and `echo` itself.
+* Alternative formatting tools: `sed`, `echo` (with `xargs`), and `printf`.
+  * `sed 's/^/Lines: /'`
+  * `xargs echo "Lines $1"`
+  * `xargs printf "Lines: %s\n"`
 * To match multiple extensions: `for f in *.{txt,log,py}; do ...; done`.
 
 ---
 
-#### Script 2 — IF, export, and child script (longhand default)
+## Script 2 — if, export, and child script
 
 runner.sh
 
 ```bash
 #!/usr/bin/env bash
-# runner.sh - longhand default assignment
+# runner.sh
 if [[ -z "$1" ]]; then
   MODE="summary"
 else
@@ -63,13 +69,13 @@ else
 fi
 ```
 
-Teaching note for instructor
-
-* The explicit longhand default (`if [[ -z "$1" ]]; then VAR=default; fi`) is equivalent to the shorthand `VAR="${1:-default}"`. Present the shorthand after students are comfortable with the longhand.
+> Advanced note:
+>
+> * The code `if [[ -z "$1" ]]; then VAR=default; fi`is equivalent to  `VAR="${1:-default}"`. Present the shorthand after students are comfortable with the longhand.
 
 ---
 
-#### Two-line cheat-sheet (copy on your terminal)
+## Two-line cheat-sheet
 
 * FOR loop pattern:
 

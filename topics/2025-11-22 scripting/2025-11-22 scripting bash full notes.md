@@ -1,8 +1,8 @@
-### Instructor Guide — Bash Scripting: 1‑Hour Lesson
+# Instructor Guide — Bash Scripting: 1‑Hour Lesson
 
 ---
 
-### Overview and goals
+## Overview and goals
 
 * Purpose: teach beginners how to use bash as a scripting language by alternating short interactive reviews with practical scripting exercises.
 * Outcomes: students will be able to run simple for loops, use if/then branching, set a default parameter longhand, and understand how export passes values to child processes.
@@ -10,7 +10,7 @@
 
 ---
 
-### Timing and flow (60 minutes)
+## Timing and flow (60 minutes)
 
 * 0–5 min — Welcome, goals, and quick safety/etiquette (don’t run unknown scripts).
 * 5–15 min — REVIEW 1: quick interactive recap of three core commands.
@@ -21,19 +21,17 @@
 
 ---
 
-### Review 1 — core commands (5–10 minutes)
+## Review 1 — core commands (5–10 minutes)
 
 Goal: warm the class with familiar, one-line commands. Keep each demo short and invite a volunteer to run one.
 
-* ls — show directory contents; demo: ls -la
+* ls - show directory contents; demo: ls -la
 * cat — show file contents; demo: cat file.txt; cat file1 file2
 * grep — search inside files; demo: grep 'TODO' *.md; mention -i for case-insensitive
 
-Teaching prompt: ask one student to run command --help or man to find one flag to show the class.
-
 ---
 
-### Script 1 — FOR loop: summarize .txt files (15 minutes)
+## Script 1 — FOR loop: summarize .txt files (15 minutes)
 
 Goal: demonstrate how a for loop automates repeating the same commands for many files. Have students type and run this script.
 
@@ -62,17 +60,13 @@ Notes immediately after Script 1
 * Alternative formatting tools: `awk`, `printf`, and `echo` itself.
 * To match multiple extensions use brace expansion: `for f in *.{txt,log,py}; do ...; done`.
 
-Class activity
+Debugging tip
 
-* Have 2–3 students modify the loop to append results to summary.txt with `>>` and run it. Verify summary.txt content together.
-
-Instructor debugging tip
-
-* If a student gets no output, ask them to `ls -la` to confirm .txt files exist in the current working directory.
+* If you don't get any output, run `ls -la` to confirm .txt files exist in the current working directory.
 
 ---
 
-### Review 2 — three additional basic commands (10 minutes)
+## Review 2 — three additional basic commands (10 minutes)
 
 Goal: prepare students for the branching and child-process examples.
 
@@ -80,11 +74,9 @@ Goal: prepare students for the branching and child-process examples.
 * wc — demo `wc -l file.txt` and `wc -w file.txt`.
 * chmod — demo `chmod +x script.sh` then `./script.sh`.
 
-Teaching prompt: run a quick exercise where a volunteer makes a tiny script executable and runs it.
-
 ---
 
-### Script 2 — IF, export, and child script (15 minutes)
+## Script 2 — IF, export, and child script (15 minutes)
 
 Goal: introduce branching with a readable longhand default assignment, demonstrate export inheritance, and practice running a child script.
 
@@ -132,37 +124,33 @@ Demonstration steps
 4. Show the effect of removing export MODE (or set MODE without export) and re-run to demonstrate child no longer sees the value.
 5. Quick subshell demo: `MODE=foo bash -c 'echo subshell MODE=$MODE'` to illustrate how exported values propagate to subprocesses started from the shell.
 
-Class activity
+Advanced note
 
-* Students edit runner.sh to change the default to a different word (e.g., detailed) and run different cases.
-
-Teaching note for instructor (explicit)
-
-* Use the longhand default: `if [[ -z "$1" ]]; then VAR=default; fi` for clarity with beginners. After students are comfortable, show the shorthand `VAR="${1:-default}"` and explain it does the same thing more tersely.
+* `if [[ -z "$1" ]]; then VAR=default; fi` does the same thing as `VAR="${1:-default}"` . Mention EXPANSION and the fact that this is in `man bash`. Also, it might melt your brain for a while.
 
 ---
 
-### Wrap-up, extensions, and homework (5 minutes)
+## Wrap-up, extensions, and homework (5 minutes)
 
 Quick recap
 
 * FOR automates repetition; IF chooses execution path; export shares variables with child processes.
 
-Short extensions / homework
-
-* Add a timestamp header to the summary file produced by Script 1.
-* Modify child.sh to write logs into a logs/ directory and rotate old logs by moving them into an archive directory with a date suffix.
-* Optional advanced for strong students: replace the simple glob with a null-safe find/read loop: `while IFS= read -r -d '' file; do ...; done < <(find . -name '*.txt' -print0)`.
-
-Instructor reminders
+Notes:
 
 * Always quote variables (`"$var"`) to avoid word splitting and filename issues.
 * Use `set -x` briefly to show students command expansions when debugging; turn off with `set +x`.
 * Prepare a small set of sample .txt files in the repo so demonstrations are deterministic for everyone.
 
+Advanced ideas:
+
+* Add a timestamp header to the summary file produced by Script 1.
+* Modify child.sh to write logs into a logs/ directory and rotate old logs by moving them into an archive directory with a date suffix.
+* You can replace the simple glob with a null-safe find/read loop: `while IFS= read -r -d '' file; do ...; done < <(find . -name '*.txt' -print0)`.
+
 ---
 
-### Materials to distribute
+## Materials to distribute
 
 * Student Lab Sheet (one-page handout you approved) — contains Script 1, Script 2, shortened notes, and the two-line cheat sheet.
 * Instructor copy (this guide) with timing, prompts, and troubleshooting notes.
