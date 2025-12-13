@@ -1,4 +1,8 @@
-<!-- markdownlint-disable MD033 --><!-- markdownlint-disable MD041 --><table style="font-size: 0.85em; line-height: 1.0;">
+<!-- markdownlint-disable MD033 -->
+
+<!-- markdownlint-disable MD041 -->
+
+<table style="font-size: 0.85em; line-height: 1.0;">
   <tr>
     <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
   </tr>
@@ -8,7 +12,7 @@
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Presenter</strong></td>
-    <td style="padding: 2px;">Chad Hanson</td>
+    <td style="padding: 2px;">Chad Johnson</td>
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Document</strong></td>
