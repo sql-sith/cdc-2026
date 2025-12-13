@@ -1,5 +1,4 @@
-<!-- markdownlint-disable MD033 -->
-<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 --><!-- markdownlint-disable MD041 -->
 <table style="font-size: 0.85em; line-height: 1.0;">
   <tr>
     <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
