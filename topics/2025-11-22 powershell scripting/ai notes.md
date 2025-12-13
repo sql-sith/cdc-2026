@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Presenter</strong></td>
-    <td style="padding: 2px;">Chad Hanson</td>
+    <td style="padding: 2px;">Chad Johnson</td>
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Document</strong></td>
