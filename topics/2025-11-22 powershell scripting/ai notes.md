@@ -12,7 +12,11 @@
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Presenter</strong></td>
+<<<<<<< HEAD
     <td style="padding: 2px;">Chad Hanson</td>
+=======
+    <td style="padding: 2px;">Chad Johnson</td>
+>>>>>>> 768535ccd10de135f56a3e772337fbb82d3c515e
   </tr>
   <tr>
     <td style="padding: 2px;"><strong>Document</strong></td>
