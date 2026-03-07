@@ -1,5 +1,7 @@
 <!-- markdownlint-disable MD033 -->
+
 <!-- markdownlint-disable MD041 -->
+
 <table style="font-size: 0.85em; line-height: 1.0;">
   <tr>
     <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
@@ -160,7 +162,7 @@ This output shows you the publisher, homepage, release notes, and documentation 
 * Using your editor, create a new, empty document, type in it to enter some text, and then save it as a file in your `$HOME\pwsh_sandbox` directory.
 * Go back to the `$HOME\pwsh_sandbox` directory in PowerShell and use the command `Get-Content -Path <filename>` to see the content of the file you just created. It should look the same as it did in your editor.
 
-Finally, after discovering the package you want to install, use `winget install` to install it. You can include other keywords to ensure you are specifying the correct package. I usually use `--Source` to specify the source repository, and `--Exact` to make sure I have the package and source names exactly right. The source name is in the `winget search` output, and `--Exact` is case-sensitive, so that `winget install --Id notepad++.notepad++ --Source winget --Exact` won't work, because `--Exact` requires the `Id` field to be _exactly_ `Notepad++.Notepad++` (with upper-case `N` characters).
+Finally, after discovering the package you want to install, use `winget install` to install it. You can include other keywords to ensure you are specifying the correct package. I usually use `--Source` to specify the source repository, and `--Exact` to make sure I have the package and source names exactly right. The source name is in the `winget search` output, and `--Exact` is case-sensitive, so that `winget install --Id notepad++.notepad++ --Source winget --Exact` won't work, because `--Exact` requires the `Id` field to be *exactly* `Notepad++.Notepad++` (with upper-case `N` characters).
 
 To install `Notepad++`, you could use this `winget` command:
 
