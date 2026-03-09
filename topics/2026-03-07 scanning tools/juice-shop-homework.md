@@ -6,22 +6,24 @@ Welcome to OWASP Juice Shop! This guide has several resources to learn more abou
 
 ## An apology
 
-I want to apologize for the connectivity issues we ran into on Saturday. I know it was frustrating that your laptops couldn't reach the Juice Shop instances, especially since the whole point was to give you something hands‑on to work with. This year has had its share of surprise demo failures, and this was another one.
+I want to apologize for the connectivity issues we ran into on Saturday. I know it was frustrating that your laptops couldn't reach the Juice Shop instances. The whole point was to give you something hands‑on to work with. We've had too many demos go wrong in too many ways this year.
 
-Since class, I've been working on a more reliable setup that will hold up on guest Wi‑Fi and also support anyone joining remotely, like Naomi did. My goal is to make sure you always have a stable way to access the material, wherever you're connecting from, and you are going to test it ... now.
+Since class, I've been thinking about more reliable ways to get connected to demos, regardless of where you are located. I am testing a new way to do this using a service from CloudFront, and you are going to test it ... now.
 
 I have setup a separate Juice Shop instance for each of you at the following URLs.
-
-- https://juice-axel.teamfive.club
-- https://juice-aksel.teamfive.club
-- https://juice-hans.teamfive.club
-- https://juice-isaac.teamfive.club
-- https://juice-kizek.teamfive.club
-- https://juice-naomi.teamfive.club
-
-... and last, but not lesat:
-
-- https://juice-koah.teamfive.club
+<!-- markdownlint-disable no-inline-html -->
+<table>
+    <thead>
+        <tr><th colspan=2>Juice Shop URLs</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><a href="https://juice-axel.teamfive.club">https://juice-axel.teamfive.club</a></td><td><a href="https://juice-isaac.teamfive.club">https://juice-isaac.teamfive.club</a></td></tr>
+        <tr><td><a href="https://juice-aksel.teamfive.club">https://juice-aksel.teamfive.club</a></td><td><a href="https://juice-kizek.teamfive.club">https://juice-kizek.teamfive.club</a></td></tr>
+        <tr><td><a href="https://juice-hans.teamfive.club">https://juice-hans.teamfive.club</a></td><td><a href="https://juice-naomi.teamfive.club">https://juice-naomi.teamfive.club</a></td></tr>
+        <tr><td style="text-align: center;"><strong>And last, but not least:</strong></td><td><strong><a href="https://juice-koah.teamfive.club">https://juice-koah.teamfive.club</a></strong></td></tr>
+    </tbody>
+</table>
+<!-- markdownlint-enable no-inline-html -->
 
 ## Learning about Juice Shop
 
