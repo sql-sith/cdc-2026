@@ -12,7 +12,7 @@ Since class, I've been working on a more reliable setup that will hold up on gue
 
 I have setup a separate Juice Shop instance for each of you at the following URLs.
 
-- https://juice-alex.teamfive.club
+- https://juice-axel.teamfive.club
 - https://juice-aksel.teamfive.club
 - https://juice-hans.teamfive.club
 - https://juice-isaac.teamfive.club
