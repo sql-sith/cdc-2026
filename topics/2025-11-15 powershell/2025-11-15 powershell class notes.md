@@ -48,7 +48,7 @@ Set-Location $HOME\pwsh_playground
 ## 1. Orientation
 
 * **Explain:** PowerShell is an object-oriented shell and scripting language that sends .NET objects between commands instead of plain text.
-* **cmdlets, commands, and variables:** `Get-Location`, `Get-ChildItem`, `whoami, $env:USERNAME`
+* **cmdlets, commands, and variables:** `Get-Location`, `Get-ChildItem`, `whoami, $env:USER`
 * **Mini-challenges:**
   * Where are you in the filesystem right now?
   * What is your username?

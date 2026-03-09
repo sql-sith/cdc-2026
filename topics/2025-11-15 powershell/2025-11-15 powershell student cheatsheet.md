@@ -1,4 +1,24 @@
 <!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD041 -->
+<table style="font-size: 0.85em; line-height: 1.0;">
+  <tr>
+    <th colspan="2" style="padding: 2px;">Cedar Rapids Area Homeschools Cyber Defense Club</th>
+  </tr>
+  <tr>
+    <td style="padding: 2px;"><strong>Date</strong></td>
+    <td style="padding: 2px;">2025-11-08</td>
+  </tr>
+  <tr>
+    <td style="padding: 2px;"><strong>Presenter</strong></td>
+    <td style="padding: 2px;">Chris Leonard</td>
+  </tr>
+  <tr>
+    <td style="padding: 2px;"><strong>Document</strong></td>
+    <td style="padding: 2px;">Teaching Notes</strong></td>
+  </tr>
+</table>
+<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable MD041 -->
 
 <!-- markdownlint-disable MD041 -->
 
