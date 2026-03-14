@@ -1,0 +1,42 @@
+
+
+# juice shop URL:
+https://juice-<name>/teamfive.club
+
+# do some of the juice shop one-star demos. 20 minutes.
+
+# show that a fuzzer can find hidden folders quickly (sometimes):
+feroxbuster -u http://localhost:3012 -w C:\users\chris\source\repos\danielmiessler\SecLists\Discovery\Web-Content\common_directories.txt
+
+# autoscan demo:
+ZAP - auto scan
+Ctrl-T - authentication tester / new context, etc.
+
+# if needed (mkdir -p won't complain if it's already there):
+mkdir -p ~/source/repos
+cd ~/source/repos
+git clone https://github.com/juice-shop/juice-shop
+cd juice-shop
+
+# use a venv if you know how. it's out of scope for today
+python -m pip install semgrep
+
+# semgrep. scan makes it easy to change configs from the terminal;
+# ci automatically sends nicely-grouped results to the semgrep website
+# and runs a lot more rules (requires login) but does not give access
+# to source code at semgrep website.
+
+# locally-run:
+## them:
+semgrep scan --config auto --no-git-ignore .
+## me:
+semgrep ci --no-git-ignore
+
+# semgrep-managed/:
+
+## note that even the winning repo has issues:
+sql-sith/alex-cantor-ISU-InternationalCDC-2026
+
+## note that my 676-line civil script and my
+## 235-line sneaky script are both issue-free
+sql-sith/iscore-scraper
