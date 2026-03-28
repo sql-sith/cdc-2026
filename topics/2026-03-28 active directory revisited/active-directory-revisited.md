@@ -28,7 +28,7 @@ Every DHCP lease starts with a four-step conversation between the client and ser
 | Step                  | From   | To        | What it says                              |
 | --------------------- | ------ | --------- | ----------------------------------------- |
 | **D**iscover    | Client | Broadcast | "Is there a DHCP server out there?"       |
-| **O**ffer       | Server | Client    | "Yes - here's an IP you can use."        |
+| **O**ffer       | Server | Client    | "Yes - here's an IP you can use."         |
 | **R**equest     | Client | Broadcast | "I'd like that IP, please."               |
 | **A**cknowledge | Server | Client    | "It's yours. Here are the full settings." |
 
@@ -95,8 +95,8 @@ We will create a scope for a hypothetical second subnet so you can see the full 
 
 1. Right-click **IPv4 → New Scope**
 2. **Name:** `Lab Subnet B`
-3. **IP Range:** `192.168.20.1` – `192.168.20.254`, mask `255.255.255.0`
-4. **Exclusions:** Add `192.168.20.1` – `192.168.20.10` (reserve low addresses for static devices like routers and servers)
+3. **IP Range:** `192.168.20.1` - `192.168.20.254`, mask `255.255.255.0`
+4. **Exclusions:** Add `192.168.20.1` - `192.168.20.10` (reserve low addresses for static devices like routers and servers)
 5. **Lease Duration:** Leave at 8 days for a stable wired network
 6. **Configure Options Now:** Yes
    - **Router (003):** `192.168.20.1`
@@ -192,13 +192,37 @@ So a GPO linked to `Users\Admins` OU overrides a conflicting setting in a GPO li
 
 ### Hands-On (20 min)
 
-> Open Group Policy Management on the domain controller.
+#### Step 1 - Create Your Personal OU
+
+Each student works in their own OU so your GPOs and objects do not conflict with each other. Do this before anything else.
+
+Open **Active Directory Users and Computers**:
+
+`Server Manager → Tools → Active Directory Users and Computers`
+
+1. In the left pane, right-click the domain (e.g., `SCHOOL14.TEST`) → **New → Organizational Unit**
+2. Name it `OU-<firstname>` (replace `<firstname>` with your first name, e.g., `OU-Alex`)
+3. Leave **Protect container from accidental deletion** checked, click OK
+
+Now move your accounts and VM into this OU. For each object, right-click it → **Move** → select your new OU:
+
+- Your user account (`<firstname>`)
+- Your admin account (`<firstname>-admin`)
+- Your VM's computer account (should match your VM's hostname)
+
+> If you are not sure where your accounts are, use **Action → Find**, search by name, and right-click the result to move it.
+
+Your OU is now ready. All GPOs you create in the remaining steps will be linked here.
+
+---
+
+> Now open Group Policy Management on the domain controller.
 >
 > `Server Manager → Tools → Group Policy Management`
 
 ---
 
-#### Step 1 - Orient Yourself
+#### Step 2 - Orient Yourself
 
 Expand your domain. You will see:
 
@@ -210,39 +234,43 @@ Click on the **Default Domain Policy** and go to the **Settings** tab. This show
 
 ---
 
-#### Step 2 - Redirect Default User and Computer Containers
+#### Step 3 - Redirect Default User and Computer Containers
 
-By default, new user accounts land in `CN=Users` and new computer accounts land in `CN=Computers`. These are plain containers, not OUs — meaning GPOs linked to your Users or Computers OUs will not apply to objects sitting in those default locations.
+By default, new user accounts land in `CN=Users` and new computer accounts land in `CN=Computers`. These are plain containers, not OUs - meaning GPOs linked to your Users or Computers OUs will not apply to objects sitting in those default locations.
 
-To redirect new accounts into the correct OUs automatically, run these commands on the domain controller (adjust the distinguished name to match your domain):
+To redirect new accounts into the correct OUs automatically, you would run these commands on the domain controller (adjust the distinguished name to match your domain).
+
+> Note: this did not work with my chris-admin account, so I did this with the domain administrator account SCHOOL14\Administrator. I changed the password for that account to `P@ssw0rd+` so that if you want to log in and run this command, you can. There is no harm in running it more than once.
 
 ```cmd
 redirusr "OU=Users,DC=lab,DC=local"
 redircmp "OU=Computers,DC=lab,DC=local"
 ```
 
-After running these, any new account created without an explicit OU target will land in the specified OU and immediately fall under whatever GPOs are linked there.
+After running these, any new account created without an explicit OU target will land in the specified OU and immediately fall under whatever GPOs are linked there. To see this, launch Server Manager --> Tools --> Active Directory Users and Computers, connect to the SCHOOL14.TEST domain if needed, right-click on the domain and add a new user. The values you use don't matter - just give it a name and a password and anything else that might be required but that's all. Don't supply any fields you don't have to.
 
-> Note: accounts created by scripts or tools that specify an OU explicitly will still go where the script says — `redirusr` and `redircmp` only change the default fallback.
+When you create this user, you will see that it automatically gets put into the `Student Users` OU instead of the `Users` folder.
+
+> Note: accounts created by tools that specify an OU explicitly will still go where the script says - `redirusr` and `redircmp` only change the default fallback.
 
 ---
 
-#### Step 3 - Verify GPO Scope with Security Filtering
+#### Step 4 - Verify GPO Scope with Security Filtering
 
 Click any GPO, then look at the **Scope** tab.
 
 Under **Security Filtering**, you will see `Authenticated Users` by default. This means the GPO applies to all users and computers that are authenticated - everyone.
 
-You can restrict a GPO to a specific group by removing `Authenticated Users` and adding a specific security group. This is how you apply a policy to only, say, the `IT Admins` group rather than everyone.
+You can restrict a GPO to a specific group by removing `Authenticated Users` and adding a specific security group. This is how you apply a policy to only, say, the `Student Accounts` group rather than everyone.
 
 ---
 
-#### Step 4 - Create a New GPO (User Configuration)
+#### Step 5 - Create a New GPO (User Configuration)
 
-We will create a GPO that sets a desktop wallpaper for all users in the Users OU. This is a common, visible way to verify GPO application is working.
+We will create a GPO that sets a desktop wallpaper for your user accounts. This is a common, visible way to verify GPO application is working.
 
-1. In the left pane, right-click your **Users OU → Create a GPO in this domain and link it here**
-2. Name it `User - Desktop Wallpaper`
+1. In the left pane, right-click **your OU** (`OU-<firstname>`) → **Create a GPO in this domain and link it here**
+2. Name it `<firstname> - Desktop Wallpaper`
 3. Right-click the new GPO → **Edit**
 
 In the Group Policy Management Editor:
@@ -254,16 +282,16 @@ In the Group Policy Management Editor:
 8. **Wallpaper Style:** `Fill`
 9. Click OK and close the editor
 
-> Notice we put this under **User Configuration** and linked it to the **Users OU** - both halves match. Users in that OU will receive this setting at login.
+> This is under **User Configuration** and linked to your OU, which contains your user accounts. Your OU also contains your VM's computer account - that is fine. Computer accounts ignore User Configuration settings, and user accounts ignore Computer Configuration settings. Each object only processes the half that applies to it.
 
 ---
 
-#### Step 5 - Create a New GPO (Computer Configuration)
+#### Step 6 - Create a New GPO (Computer Configuration)
 
-Now we will make a Computer Configuration policy that disables optical drives (CD/DVD) on lab workstations - a useful defensive control.
+Now we will make a Computer Configuration policy that disables optical drives (CD/DVD) on your VM - a useful defensive control.
 
-1. Right-click your **Computers OU → Create a GPO in this domain and link it here**
-2. Name it `Computer - Disable Optical Drives`
+1. Right-click **your OU** (`OU-<firstname>`) → **Create a GPO in this domain and link it here**
+2. Name it `<firstname> - Disable Optical Drives`
 3. Right-click → **Edit**
 4. Navigate to: `Computer Configuration → Policies → Administrative Templates → System → Removable Storage Access`
 5. Enable all three of the following settings:
@@ -272,11 +300,11 @@ Now we will make a Computer Configuration policy that disables optical drives (C
    - **CD and DVD: Deny execute access**
 6. Set each to **Enabled**, click OK
 
-> There is no single "deny all" setting for CD/DVD the way there is for all removable storage, so you need to enable all three. This is linked to the **Computers OU** under **Computer Configuration** - both halves match.
+> There is no single "deny all" setting for CD/DVD the way there is for all removable storage, so you need to enable all three. Both GPOs are now linked to the same OU - your user accounts pick up the User Configuration wallpaper policy, and your VM picks up the Computer Configuration optical drive policy.
 
 ---
 
-#### Step 6 - Force a Policy Update and Verify
+#### Step 7 - Force a Policy Update and Verify
 
 On any domain-joined machine in the lab, open a command prompt and run:
 
@@ -304,16 +332,16 @@ Open that file in a browser for a complete breakdown of every applied setting, i
 
 ---
 
-#### Step 7 - Intentionally Break It (and Fix It)
+#### Step 8 - Intentionally Break It (and Fix It)
 
-To make the earlier confusion concrete, let us see what happens when you link a User Configuration GPO to the wrong place.
+To make the earlier confusion concrete, let us see what happens when you link a User Configuration GPO to an OU that contains only computer accounts.
 
-1. In GPMC, right-click the `User - Desktop Wallpaper` GPO
-2. Choose **Link an existing GPO** on the **Computers OU**
-3. Run `gpupdate /force` on a workstation
-4. The wallpaper setting will not apply - the wallpaper GPO is now linked to a Computers OU, so it applies to *computer accounts*, which do not process User Configuration
+1. In GPMC, right-click the `<firstname> - Desktop Wallpaper` GPO
+2. Choose **Link an existing GPO** on the **Student VMs** OU (the one that contains only computer accounts, not your personal OU)
+3. Run `gpupdate /force` on your VM
+4. The wallpaper setting will not apply - the GPO is now linked to an OU of computer accounts, which do not process User Configuration
 
-Remove the incorrect link by right-clicking it in the Computers OU and choosing **Delete Link** (not Delete GPO).
+Remove the incorrect link by right-clicking it under the Student VMs OU and choosing **Delete Link** (not Delete GPO).
 
 This is exactly what happened during the failed demo. The policy existed; it just was not linked to the right OU for the right object type.
 
