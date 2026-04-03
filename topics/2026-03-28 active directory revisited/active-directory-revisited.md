@@ -336,14 +336,15 @@ Open that file in a browser for a complete breakdown of every applied setting, i
 
 To make the earlier confusion concrete, let us see what happens when you link a User Configuration GPO to an OU that contains only computer accounts.
 
-1. In GPMC, right-click the `<firstname> - Desktop Wallpaper` GPO
-2. Choose **Link an existing GPO** on the **Student VMs** OU (the one that contains only computer accounts, not your personal OU)
-3. Run `gpupdate /force` on your VM
-4. The wallpaper setting will not apply - the GPO is now linked to an OU of computer accounts, which do not process User Configuration
+1. In GPMC, right-click the **Student VMs** OU (the one that contains only computer accounts, not your personal OU)
+2. Choose **Link an existing GPO**
+3. Select the `<firstname> - Desktop Wallpaper` GPO from the list that appears
+4. Run `gpupdate /force` on your VM
+5. The wallpaper setting will not apply - the GPO is now linked to an OU of computer accounts, which do not process User Configuration
 
 Remove the incorrect link by right-clicking it under the Student VMs OU and choosing **Delete Link** (not Delete GPO).
 
-This is exactly what happened during the failed demo. The policy existed; it just was not linked to the right OU for the right object type.
+This is exactly what happened during our failed demo earlier in the year. The policy existed; it just was not linked to the right OU for the right object type.
 
 ---
 
