@@ -11,6 +11,7 @@ def hash_password(password):
 # One for-loop per character position.
 # This simplified cracker is hardcoded to passwords of length 4.
 def crack(target_hash):
+    global CHARSET
     attempts = 0
     for c1 in CHARSET:
         for c2 in CHARSET:
@@ -23,6 +24,10 @@ def crack(target_hash):
                         print(f"  ...tried {attempts:,} ({percent:.1f}%)")
                     if hash_password(candidate) == target_hash:
                         return candidate, attempts
+
+    # # The code above is hard-coded for a specific password length of 4.
+    # # The code below can work for any length.
+
     # global CHARSET
     # global length
     # attempts = 0
@@ -43,19 +48,21 @@ length = int(f.readline().strip())
 target_hash = f.readline().strip()
 f.close()
 
-# if length != 4:
-#     print("This simplified cracker only handles length 4.")
-#     print("The hash file says the password has length " + str(length) + ".")
-#     print("Set PASSWORD_LENGTH = 4 in make_password_simplified.py and run it again,")
-#     print("or use crack_password.py for other lengths.")
-# else:
-total_combinations = len(CHARSET) ** length
-print("Target hash:  " + target_hash)
-print("Length:       " + str(length))
-print("Charset size: " + str(len(CHARSET)))
-print("Combinations: " + str(total_combinations))
-print("Cracking...")
-print()
+# if you switch to the alternative code in crack() that can work with any password
+# length, you should remove or comment out this length check:
+if length != 4:
+    print("This simplified cracker only handles length 4.")
+    print("The hash file says the password has length " + str(length) + ".")
+    print("Set PASSWORD_LENGTH = 4 in make_password_simplified.py and run it again,")
+    print("or use crack_password.py for other lengths.")
+else:
+    total_combinations = len(CHARSET) ** length
+    print("Target hash:  " + target_hash)
+    print("Length:       " + str(length))
+    print("Charset size: " + str(len(CHARSET)))
+    print("Combinations: " + str(total_combinations))
+    print("Cracking...")
+    print()
 
 start = time.time()
 found, attempts = crack(target_hash)
