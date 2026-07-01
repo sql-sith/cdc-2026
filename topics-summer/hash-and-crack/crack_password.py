@@ -6,7 +6,7 @@ import time
 CHARSET = string.ascii_lowercase + string.digits  # must match make_password.py
 
 def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+    return hashlib.md5(password.encode()).hexdigest()
 
 with open("secret_hashes.txt") as f:
     length = int(f.readline().strip())
