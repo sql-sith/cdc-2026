@@ -72,7 +72,7 @@ def get_weather(city: str) -> dict:
 
     Raises:
     - ValueError if `city` is an image filename.
-    - ValueError if wttr.in fails to return an OK status.
+    - Some form of HTTPError if the request fails.
     """
     # Avoid images. (wttr.in has special functionality we wanna
     # avoid here)
@@ -95,8 +95,7 @@ def get_weather(city: str) -> dict:
     )
 
     # Ensure request returned properly
-    if not r.ok:
-        raise ValueError("Failed to get weather")
+    r.raise_for_status()
 
     # Get the JSON and return it
     out = r.json()
