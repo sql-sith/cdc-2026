@@ -1,3 +1,5 @@
+import sys
+
 '''
     There are three problems with this code:
         - a naming problem
@@ -7,5 +9,11 @@
 def get_lowercase_words(s):
     return " ".join([str for str in s.split(" ") if str.lower() == str])
 
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        msg = sys.argv[1]
+    else:
+        msg = "HELLO world this is A test"
 
-print(get_lowercase_words("I WANT 2 have MOAR happy much joy DOGE DOGE dogE doge mor"))
+    print(f"Original string:  {msg}")
+    print(f"Lower-case words: {get_lowercase_words(msg)}")

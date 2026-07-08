@@ -1,3 +1,5 @@
+import sys
+
 def make_leet(s):
     # Create an empty bucket for our final translated word
     result = ""
@@ -27,5 +29,11 @@ def make_leet(s):
     return result
 
 
-print(make_leet("let the games begin"))
-# Output: 137 7h3 94m35 b391n
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        msg = sys.argv[1]
+    else:
+        msg = "let the games begin"
+
+    print(f"Original string:  {msg}")
+    print(f"1337 string: {make_leet(msg)}")

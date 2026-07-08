@@ -1,3 +1,5 @@
+import sys
+
 def get_lowercase_words(s):
     result = ""
     current_word = ""
@@ -29,5 +31,11 @@ def get_lowercase_words(s):
     return result
 
 
-print(get_lowercase_words("HELLO world this is A test"))
-# Output: world this is test
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        msg = sys.argv[1]
+    else:
+        msg = "HELLO world this is A test"
+
+    print(f"Original string:  {msg}")
+    print(f"Lower-case words: {get_lowercase_words(msg)}")
