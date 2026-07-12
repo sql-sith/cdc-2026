@@ -3,7 +3,7 @@
 
 # Cheat Sheet for Python
 
-As requested by Director Dan, supervised by no one, and composed by Aksel Rasmussen. Created following the links Dan had questions on and wanted summaries for.
+As requested by Dictator Dan, supervised by no one, and composed by Aksel Rasmussen. Created following the links Dan had questions on and wanted summaries for.
 
 ## [String Methods](https://www.w3schools.com/python/python_strings_methods.asp)
 
