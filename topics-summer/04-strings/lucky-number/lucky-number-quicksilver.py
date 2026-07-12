@@ -33,6 +33,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         name = sys.argv[1]
     else:
-        name = "Bubba Gump"
+        name = "Bubbbbba Gump"
 
     print(f"The lucky number for {name} is {get_lucky_number(name)}.")
