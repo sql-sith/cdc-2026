@@ -3,7 +3,7 @@ import sys
 # These are now at the module-level instead of inside a function.
 # Frozen sets are hash lookups, not just strings.
 # This makes character lookups faster - O(1) instead of O(n) for those who want to know.
-VOWELS = frozenset("aeiou")
+VOWELS = frozenset("aeiou") #  ab32 -> "a" ; ###3 -> "b"
 CONSONANTS = frozenset("bcdfghjklmnpqrstvwxyz")
 
 
