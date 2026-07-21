@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from test_cases import set_test_cases
 
 def get_squares(numbers):
