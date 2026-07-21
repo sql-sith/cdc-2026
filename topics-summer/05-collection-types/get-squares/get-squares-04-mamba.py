@@ -1,6 +1,17 @@
 from collections.abc import Iterable
+from test_cases import set_test_cases
 from types import GeneratorType
-from typing import Any
+
+
+class AkselString(str):
+    def __pow__(self, exponent: int) -> 'AkselString':
+        """
+        I received three different options on how to square strings from an AI,
+        plus this one from Aksel. :)
+        """
+        if not isinstance(exponent, int):
+            return NotImplemented
+        return AkselString(self * 2 * len(self))
 
 
 class FormalString(str):
@@ -19,21 +30,16 @@ class FormalString(str):
         return FormalString(super().__mul__(other))
 
 
-def set_test_cases() -> list[Any]:
-    tests = []
-    tests.append([])
-    tests.append("[]")
-    tests.append({1, 2, 4, 5.2})
-    tests.append([2, 5, 11])
-    tests.append((5, 10, 2, 17, 9, 1, 4))
-    tests.append({1: 100, 2: 14, 3: 1})
-    tests.append("abcde")
-    tests.append(b'4567')
-    return tests
-
 
 # def get_squares[T: Collection](x: T) -> T:
 def get_squares(x: Iterable):
+    '''
+        - Adds support for strings.
+        - Corrects handling of byte strings.
+        - Squares both key and value of dicts.
+
+        TODO: skip un-squarable values.
+    '''
     # 1. Handle Dictionaries (Mappings)
     # We do this first because dicts iterate over keys by default, losing the values.
     if isinstance(x, dict):
@@ -43,8 +49,10 @@ def get_squares(x: Iterable):
 
     # 2. Handle Strings
     elif isinstance(x, str):
-        s = FormalString(x)
-        result = s * 2
+        s = AkselString(x)
+        # I got three formal definitions of squaring a string from an AI,
+        # but they were boring. This is Aksel's idea, and is much more fun.
+        result = s ** 2
 
     # 3. Handle Generators / Custom Iterators
     elif isinstance(x, (GeneratorType, map, filter)):
@@ -70,6 +78,7 @@ def get_squares(x: Iterable):
     try:
         return type(x)(result)
     except TypeError as e:
+        print(f'ERROR [get_squares]: {e}')
         print("Cannot match type of original iterable. Falling back to list.")
         return list(result)
 
@@ -83,5 +92,5 @@ if __name__ == "__main__":
             print(f"Squared data: {test_case_squared} <{type(test_case_squared).__name__}>")
             print(f"Original data: {test_case} <{type(test_case).__name__}>")
         except (ValueError, TypeError) as e:
-            print(f'\nError encountered: {e}')
+            print(f'ERROR [main]: {e}')
             continue

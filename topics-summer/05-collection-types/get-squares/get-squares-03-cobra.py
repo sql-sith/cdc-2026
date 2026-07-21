@@ -1,20 +1,15 @@
-import sys
-from argparse import Namespace
-from collections.abc import Iterable
-import argparse
-from typing import Any
 from test_cases import set_test_cases
 
-def get_squares(numbers):
+def get_squares(values):
     try:
         result = []
-        for i, number in enumerate(numbers):
-            result.append(number ** 2)
+        for value in values:
+            result.append(value ** 2)
     except Exception as e:
         print(f'ERROR [get_squares]: {e}')
         return []
 
-    return type(numbers)(result)
+    return type(values)(result)
 
 
 if __name__ == "__main__":
