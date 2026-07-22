@@ -11,7 +11,7 @@ You are piloting the lunar landing module in 1969, and the data telling you wher
 
 For instance, given:
 
-```js
+```py
 [
   [1, 0],
   [2, 0]
