@@ -8,7 +8,8 @@ Tonight, there are three problems for you to choose from. When I tell you which 
    This has you determine how many days it is until a person's next birthday. You can start from the date given and count up to the end of that month, then add in all the days from the upcoming months until you get to their birthday month, and then add in the number of days until their birthday in that last month. There is an easier way to do it if you search for some documentation. I've labeled this one as moderate difficulty.
 3. **Word Smashup**
    I've labeled this one as the easiest, as you get to split words in half and smush them together. There are a couple of additional rules you need to pay attention to, though.
-
+4. **Igpay Atinlay**
+   Exactly what it sounds like. Moderate but easier than the other moderate one.
 
 ## Quick Primer on Arrays of Arrays.
 
