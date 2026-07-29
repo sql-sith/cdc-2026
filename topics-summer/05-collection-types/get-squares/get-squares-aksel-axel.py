@@ -4,9 +4,9 @@ def get_squares(numbers):
     """Get the square of all the elements of an iterable.
     """
     new_numbers = []
-    dict_k = []
+    keys_of_dict = []
     if isinstance(numbers, dict):
-        dict_k = list(numbers)
+        keys_of_dict = list(numbers)
         numbers = numbers.values()
     for number in numbers:
         try:
@@ -19,10 +19,10 @@ def get_squares(numbers):
         return new_numbers
     if isinstance(numbers, tuple):
         return tuple(new_numbers)
-    if len(dict_k) > 0:
+    if len(keys) > 0:
         new_dict = {}
         for k, v in zip(
-            dict_k,
+            keys_of_dict,
             new_numbers):
             new_dict[k] = v
         return new_dict
