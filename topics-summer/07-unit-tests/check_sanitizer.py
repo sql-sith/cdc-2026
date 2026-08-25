@@ -1,7 +1,7 @@
-from sanitizer import make_hashtag, format_handle
+import sanitizer
 
 # Fails (actual output is "#CodingClub" due to title casing)
-assert make_hashtag("coding club") == "codingclub"
+assert sanitizer.make_hashtag("coding club") == "codingclub"
 
 # 🚫 NEVER RUNS because line 4 crashed the script!
-assert format_handle("Coder123") == "@coder123"
+assert sanitizer.format_handle("Coder123") == "@coder123"
