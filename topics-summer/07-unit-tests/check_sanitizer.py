@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from sanitizer import make_hashtag, format_handle
 
 # Fails (actual output is "#CodingClub" due to title casing)

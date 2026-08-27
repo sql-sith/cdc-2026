@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+Here is the updated, standalone student cheatsheet rebuilt from the ground up around the **Sanitizer Script** example instead of the calculator. It is formatted cleanly without complex code blocks inside table cells so it won't break in your Markdown editor.
+
+---
+
+>>>>>>> origin/main
 # Python Unit Testing: Quick-Reference Guide
 
 ## 1. The `assert` Statement (Internal Guardrails)
@@ -142,6 +149,7 @@ def test_user_profile(subtests):
 
 ---
 
+<<<<<<< HEAD
 ## 4. Testing Complex Objects & Data Structures
 
 We added a new set of files during class, in the same 00-game-utils folder. `game_utils.py` has two functions in it. They both have comments explaining how they should work. 
@@ -150,6 +158,8 @@ Do not correct the functions based on these comments alone. Instead, edit `test_
 
 ---
 
+=======
+>>>>>>> origin/main
 ## 💡 Quick Rules of Thumb
 
 * **One scenario per test function:** Keep your `test_*()` functions focused on a single behavior or edge case.
