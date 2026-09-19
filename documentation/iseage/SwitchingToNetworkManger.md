@@ -20,7 +20,7 @@ Don't use this with Netplan! Things *will* break.
 9) In `Addresses`, input `144.76.90.{Any number under 200 and above 1}/24`. (Refer to the table of taken IPs)
 10) In `Gateway`, input `144.76.90.254`
 11) Navigate to `DNS servers`
-12) Enter `144.76.90.254` for the DNS server
+12) Enter `199.100.16.100` for the DNS server
 13) Ensure `Automatically connect` is checked
 14) Ensure `Available to all users` is checked
 15) Navigate to `OK`
@@ -34,4 +34,5 @@ Don't use this with Netplan! Things *will* break.
 # 4. Reboot system
 1) Run `systemctl reboot`
 OR
-2) Reboot using vSphere (Just use `systemctl` man)
+2) Reboot using vSphere
+
